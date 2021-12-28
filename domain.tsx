@@ -63,11 +63,5 @@ export const Domain = (props: { domain: string; wallets: string[]; }) => (
 
             ))}
         </div>
-        
-        {/* <ul class={tw`mt-10 text-center dark:text-white mx-auto`}>
-        {props.wallets.map((w) => (
-            <li>{coins[w] ? coins[w].name : w}</li>
-        ))}
-        </ul> */}
     </div>
 );

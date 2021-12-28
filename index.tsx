@@ -48,11 +48,11 @@ const onKeyUp = `
 export const Index = () => (
     <div>
         <style>{style}</style>
-        <h1 class={tw`text-5xl md:text-6xl dark:text-white text-center mt-4 mb-8 mt-20 break-all max-w-3xl mx-auto`}>hiphip.tips</h1>
-        <div class={tw`max-w-sm mx-auto`}>
+        <h1 class={tw`text-4xl md:text-6xl dark:text-white text-center mt-4 mb-8 mt-20 break-all max-w-3xl mx-auto`}>hiphip.tips</h1>
+        <div class={tw`max-w-sm mx-auto px-2`}>
             <input onkeyup={onKeyUp} id="domain-input" class={tw`rounded-md w-full text-lg px-4 pb-1 pt-1.5 text-center border-2 border-black`} type="text" placeholder="yourdomain.com" autocomplete="off" autocorrect="off" spellcheck="false"></input>
         </div>
-        <div class={tw`max-w-sm mx-auto`}>
+        <div class={tw`max-w-sm mx-auto px-2`}>
             <button
                 class={tw`rounded-md w-full text-xl px-4 pb-1 pt-1.5 text-center border-2 border-black mt-4 bg-green-400 transition-transform transform-gpu md:motion-safe:hover:scale-105 motion-safe:active:scale-95`}
                 onmouseup={onMouseUp}

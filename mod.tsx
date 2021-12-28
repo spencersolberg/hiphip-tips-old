@@ -40,7 +40,7 @@ serve(async (req) => {
         return ssr(() => <Pay domain={pathArr[0]} coin={pathArr[1]}/>);
     }
 
-    if (path == "/hiphip.tips" || path == "/hiphip.tips/") {
+    if (path.toLowerCase() == "/hiphip.tips" || path.toLowerCase() == "/hiphip.tips/") {
         return ssr(() => <Domain domain="hiphip.tips" wallets={["BTC","DOGE","ETH","HNS","MOON","STX","TRTL","XMR","XNO","XTZ"]} />);
     }
 
