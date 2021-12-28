@@ -34,3 +34,19 @@ const style = `
         }
     }
 `;
+
+export const Pay = (props: { domain: string, coin: string }) => (
+    <div>
+
+        <style>{style}</style>
+
+        <div class={tw`pt-2`}>
+            <a href="/" class={tw`px-4 text-md text-black dark:text-white`}>
+                🏠 hiphip.tips
+            </a>
+        </div>
+
+        <h1 class={tw`text-2xl md:text-3xl dark:text-white text-center mt-4 break-all max-w-3xl mx-auto`}>{props.domain.includes(".") ? props.domain.toLowerCase() : props.domain.toLowerCase() + "/"}</h1>
+
+    </div>
+)
