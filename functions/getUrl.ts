@@ -4,5 +4,7 @@ export const getUrl = (address: string, coin: any): string => {
     if(coins[coin].type == "basic") {
         console.log("basic");
         return coins[coin].protocol + address;
+    } else if(coins[coin].type == "lnAddress") {
+        return coins[coin].protocol + address;
     } else return address;
 }

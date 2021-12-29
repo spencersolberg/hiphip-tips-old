@@ -5,6 +5,12 @@ export const coins = {
         protocol: "bitcoin:",
         color: "#FF8D00"
     },
+    "BTCLN": {
+        name: "BTC Lightning",
+        type: "lnAddress",
+        protocol: "lightning:",
+        color: "#FF8D00"
+    },
     "ETH": {
         name: "Ethereum",
         type: "basic",

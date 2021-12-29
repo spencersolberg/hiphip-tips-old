@@ -20,7 +20,7 @@ serve(async (req) => {
     console.log("GET " + path);
 
     if (path == "/favicon.ico") return new Response(null);
-    if (path == "/.well-known/wallets" || path == "/.well-known/wallets/") return new Response("BTC,DOGE,ETH,HNS,MOON,STX,TRTL,XMR,XNO,XTZ");
+    if (path == "/.well-known/wallets" || path == "/.well-known/wallets/") return new Response("BTC,BTCLN,HNS");
     if (path.startsWith("/.well-known/wallets/")) {
         const ticker = path.replace("/.well-known/wallets/", "").replace("/", "");
         const file = await Deno.readFile("./static/wallets/" + ticker);
@@ -50,7 +50,7 @@ serve(async (req) => {
     }
 
     if (path.toLowerCase() == "/hiphip.tips" || path.toLowerCase() == "/hiphip.tips/") {
-        return ssr(() => <Domain domain="hiphip.tips" wallets={["BTC","DOGE","ETH","HNS","MOON","STX","TRTL","XMR","XNO","XTZ"]} />);
+        return ssr(() => <Domain domain="hiphip.tips" wallets={["BTC","BTCLN", "HNS"]} />);
     }
 
     const domain = path.replace("/", "");
