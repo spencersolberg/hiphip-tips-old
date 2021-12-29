@@ -6,22 +6,32 @@ export const coins = {
         color: "#FF8D00"
     },
     "ETH": {
-        name: "Ethereum"
+        name: "Ethereum",
+        type: "basic",
+        protocol: "ethereum:"
     },
     "HNS": {
         name: "Handshake"
     },
     "XNO": {
-        name: "Nano"
+        name: "Nano",
+        type: "basic",
+        protocol: "nano:"
     },
     "XTZ": {
-        name: "Tezos"
+        name: "Tezos",
+        type: "basic",
+        protocol: "tezos:"
     },
     "XMR": {
-        name: "Monero"
+        name: "Monero",
+        type: "basic",
+        protocol: "monero:"
     },
     "DOGE": {
-        name: "Dogecoin"
+        name: "Dogecoin",
+        type: "basic",
+        protocol: "dogecoin:"
     },
     "STX": {
         name: "Stacks"

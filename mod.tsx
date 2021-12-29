@@ -38,7 +38,7 @@ serve(async (req) => {
 
     const pathArr = path.split("/").filter(e => e !== "");
 
-    if (pathArr.length == 3 && pathArr[2].toLowerCase() == "qr.png") {
+    if (pathArr.length == 3 && pathArr[2].toLowerCase() == "qr") {
         return qr(pathArr[1], await getAddress(pathArr[0], pathArr[1]));
     }
 
