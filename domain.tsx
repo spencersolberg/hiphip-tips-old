@@ -9,9 +9,8 @@ import { coins } from "./coins.ts";
 
 const style = `
     @font-face {
-        font-family: "Anybody ExtraExpandedBlack";
-        src: url("/static/Anybody-ExtraExpandedBlack.woff2") format("woff2"),
-            url("/static/Anybody-ExtraExpandedBlack.woff") format("woff");
+        font-family: "Fluro Bold";
+        src: url("/static/FluroBold.woff") format("woff");
         font-weight: normal;
         font-style: normal;
     }
@@ -23,10 +22,10 @@ const style = `
             font-style: normal;
     }
     h1 {
-     font-family: "Anybody ExtraExpandedBlack";
+     font-family: "Fluro Bold";
     }
     span, a {
-        font-family: "Sporting Grotesque Bold";
+        font-family: "Fluro Bold";
     }
     @media (prefers-color-scheme: dark) {
         body {
@@ -41,12 +40,12 @@ export const Domain = (props: { domain: string; wallets: string[]; }) => (
             {style}
         </style>
         <div class={tw`pt-2`}>
-            <a href="/" class={tw`px-4 text-md text-black dark:text-white`}>
+            <a href="/" class={tw`px-4 text-xl text-black dark:text-white`}>
                 🏠 hiphip.tips
             </a>
         </div>
         
-        <h1 class={tw`text-2xl md:text-3xl dark:text-white text-center mt-4 break-all max-w-3xl mx-auto`}>{props.domain.includes(".") ? props.domain.toLowerCase() : props.domain.toLowerCase() + "/"}</h1>
+        <h1 class={tw`text-4xl md:text-5xl dark:text-white text-center mt-4 break-all max-w-3xl mx-auto`}>{props.domain.includes(".") ? props.domain.toLowerCase() : props.domain.toLowerCase() + "/"}</h1>
         
         <div class={tw`grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 mx-auto max-w-xs md:max-w-md`}>
             {props.wallets.map((w: string) => (
@@ -56,7 +55,7 @@ export const Domain = (props: { domain: string; wallets: string[]; }) => (
                         {coins[w] ? <img src={"/static/coins/" + w + ".png"} alt="" class={tw`w-8 h-8`} /> : <img src="/static/unknown.png" alt="" class={tw`w-8 h-8`} />}
 
 
-                        <span class={tw`mt-1.5 ml-2`}>{coins[w] ? coins[w].name : w}</span>
+                        <span class={tw`mt-0.5 ml-2 text-xl`}>{coins[w] ? coins[w].name : w}</span>
 
                     </div>
                 </a>

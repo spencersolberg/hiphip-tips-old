@@ -9,9 +9,8 @@ import { coins } from "./coins.ts";
 
 const style = `
     @font-face {
-        font-family: "Anybody ExtraExpandedBlack";
-        src: url("/static/Anybody-ExtraExpandedBlack.woff2") format("woff2"),
-            url("/static/Anybody-ExtraExpandedBlack.woff") format("woff");
+        font-family: "Fluro Bold";
+        src: url("/static/FluroBold.woff") format("woff");
         font-weight: normal;
         font-style: normal;
     }
@@ -23,10 +22,10 @@ const style = `
             font-style: normal;
     }
     h1 {
-     font-family: "Anybody ExtraExpandedBlack";
+     font-family: "Fluro Bold";
     }
-    span, a {
-        font-family: "Sporting Grotesque Bold";
+    span, a, h2 {
+        font-family: "Fluro Bold";
     }
     @media (prefers-color-scheme: dark) {
         body {
@@ -35,18 +34,23 @@ const style = `
     }
 `;
 
-export const Pay = (props: { domain: string, coin: string }) => (
+export const Pay = (props: { domain: string, coin: string, address: string }) => (
     <div>
 
         <style>{style}</style>
 
-        <div class={tw`pt-2`}>
-            <a href="/" class={tw`px-4 text-md text-black dark:text-white`}>
-                🏠 hiphip.tips
-            </a>
+        <div class={tw`py-2 flex-col justify-between mx-auto px-4 dark:text-white`}>
+            <div class={tw`mb-2`}>
+                <a href="/" class={tw`px-4 text-xl`}>
+                    🏠 hiphip.tips
+                </a>
+            </div>
+            <div class={tw`mb-2`}>
+                <a href={"/" + props.domain} class={tw`px-4 text-xl`}>⬅️ /{props.domain.includes(".") ? props.domain.toLowerCase() : props.domain.toLowerCase() + "/"}</a>
+            </div>
         </div>
 
-        <h1 class={tw`text-2xl md:text-3xl dark:text-white text-center mt-4 break-all max-w-3xl mx-auto`}>{props.domain.includes(".") ? props.domain.toLowerCase() : props.domain.toLowerCase() + "/"}</h1>
-
+        <h1 class={tw`text-4xl md:text-5xl dark:text-white text-center mt-4 break-all max-w-3xl mx-auto`}>{coins[props.coin] ? coins[props.coin].name + ` (${props.coin})` : props.coin}</h1>
+        <h2 class={tw`text-3xl mt-1  dark:text-white text-center max-w-md mx-auto`}>{props.domain.includes(".") ? props.domain.toLowerCase() : props.domain.toLowerCase() + "/"}</h2>
     </div>
 )

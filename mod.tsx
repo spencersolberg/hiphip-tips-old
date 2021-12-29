@@ -8,7 +8,9 @@ import { h, serve, ssr } from "./deps.ts";
 import { Index } from "./index.tsx";
 import { Domain } from "./domain.tsx";
 import { Pay } from "./pay.tsx";
+import { qr } from "./qr.ts";
 import { getWallets } from "./functions/getWallets.ts";
+import { getAddress } from "./functions/getAddress.ts";
 
 console.log("Listening on http://localhost:8000");
 serve(async (req) => {
@@ -36,8 +38,15 @@ serve(async (req) => {
 
     const pathArr = path.split("/").filter(e => e !== "");
 
+    if (pathArr.length == 3 && pathArr[2].toLowerCase() == "qr.png") {
+        return qr(pathArr[1], await getAddress(pathArr[0], pathArr[1]));
+    }
+
     if (pathArr.length == 2) {
-        return ssr(() => <Pay domain={pathArr[0]} coin={pathArr[1]}/>);
+        const domain = pathArr[0];
+        const coin = pathArr[1];
+        const address = await getAddress(domain, coin);
+        return ssr(() => <Pay domain={domain} coin={coin} address={address}/>);
     }
 
     if (path.toLowerCase() == "/hiphip.tips" || path.toLowerCase() == "/hiphip.tips/") {

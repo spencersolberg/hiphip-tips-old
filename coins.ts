@@ -1,6 +1,9 @@
 export const coins = {
     "BTC": {
-        name: "Bitcoin"
+        name: "Bitcoin",
+        type: "basic",
+        protocol: "bitcoin:",
+        color: "#FF8D00"
     },
     "ETH": {
         name: "Ethereum"
