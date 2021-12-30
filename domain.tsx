@@ -52,7 +52,7 @@ export const Domain = (props: { domain: string; wallets: string[]; }) => (
                 <a href={"/" + props.domain + "/" + w}>
                     <div class={tw`rounded-lg dark:text-white dark:border-white border-black border-2 p-2 text-center flex justify-center md:justify-start transition-transform transform-gpu md:motion-safe:hover:scale-105 motion-safe:active:scale-95`}>
 
-                        {coins[w] ? <img src={"/static/coins/" + w + ".png"} alt="" class={tw`w-8 h-8`} /> : <img src="/static/unknown.png" alt="" class={tw`w-8 h-8`} />}
+                        {coins[w] ? <img src={"/static/coins/" + w + ".webp"} alt="" class={tw`w-8 h-8`} /> : <img src="/static/unknown.png" alt="" class={tw`w-8 h-8`} />}
 
 
                         <span class={tw`mt-0.5 ml-2 text-xl`}>{coins[w] ? coins[w].name : w}</span>

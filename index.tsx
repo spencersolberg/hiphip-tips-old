@@ -49,7 +49,7 @@ export const Index = () => (
         <style>{style}</style>
         <h1 class={tw`text-6xl md:text-8xl dark:text-white text-center mt-4 mb-8 mt-20 break-all max-w-3xl mx-auto`}>hiphip.tips</h1>
         <div class={tw`max-w-sm mx-auto px-2`}>
-            <input onkeyup={onKeyUp} id="domain-input" class={tw`rounded-md w-full text-2xl px-4 pb-1 pt-0.5 text-center border-2 border-black`} type="text" placeholder="yourdomain.com" autocomplete="off" autocorrect="off" spellcheck="false"></input>
+            <input onkeyup={onKeyUp} id="domain-input" class={tw`rounded-md w-full text-2xl px-4 pb-1 pt-0.5 text-center border-2 border-black`} type="text" placeholder="yourdomain.com" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="none"></input>
         </div>
         <div class={tw`max-w-sm mx-auto px-2`}>
             <button
