@@ -5,33 +5,7 @@
 /// <reference lib="deno.ns" />
 
 import { h, tw } from "./deps.ts";
-
-const style = `
-    @font-face {
-        font-family: "Fluro Bold";
-        src: url("/static/FluroBold.woff") format("woff");
-        font-weight: normal;
-        font-style: normal;
-    }
-    @font-face {
-        font-family: "Sporting Grotesque Bold";
-        src: url("/static/Sporting_Grotesque-Bold_web.woff2") format("woff2"),
-            url("/static/Sporting_Grotesque-Bold_web.woff") format("woff");
-            font-weight: normal;
-            font-style: normal;
-    }
-    h1 {
-     font-family: "Fluro Bold";
-    }
-    span, input, button {
-        font-family: "Fluro Bold";
-    }
-    @media (prefers-color-scheme: dark) {
-        body {
-            background-color: black;
-        }
-    }
-`;
+import { style } from "./style.ts";
 
 const onMouseUp = `
     const domain = document.getElementById('domain-input').value;

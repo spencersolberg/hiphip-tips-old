@@ -1,4 +1,4 @@
-export const coins = {
+export const coins: any = {
     "BTC": {
         name: "Bitcoin",
         type: "basic",

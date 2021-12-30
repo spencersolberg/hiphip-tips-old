@@ -38,15 +38,18 @@ serve(async (req) => {
 
     const pathArr = path.split("/").filter(e => e !== "");
 
-    if (pathArr.length == 3 && pathArr[2].toLowerCase() == "qr") {
-        return qr(pathArr[1], await getAddress(pathArr[0], pathArr[1]));
+    if (pathArr.length >= 3 && pathArr[2].toLowerCase() == "qr") {
+        const ticker = pathArr[1];
+        const domain = pathArr[0];
+        const address = pathArr[4] ?? await getAddress(domain, ticker);
+        return qr(ticker, address);
     }
 
     if (pathArr.length == 2) {
         const domain = pathArr[0];
-        const coin = pathArr[1];
-        const address = await getAddress(domain, coin);
-        return ssr(() => <Pay domain={domain} coin={coin} address={address}/>);
+        const ticker = pathArr[1];
+        const address = await getAddress(domain, ticker);
+        return ssr(() => <Pay domain={domain} ticker={ticker} address={address}/>);
     }
 
     if (path.toLowerCase() == "/hiphip.tips" || path.toLowerCase() == "/hiphip.tips/") {
