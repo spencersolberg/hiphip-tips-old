@@ -4,7 +4,7 @@
 /// <reference lib="dom.asynciterable" />
 /// <reference lib="deno.ns" />
 
-import { h, tw } from "./deps.ts";
+import { h, tw, encode } from "./deps.ts";
 import { coins } from "./coins.ts";
 import { getUrl } from "./functions/getUrl.ts";
 import { style } from "./style.ts";
@@ -44,24 +44,37 @@ export const Pay = ({domain, ticker, address}: { domain: string, ticker: string,
             (coin(ticker) && (coin(ticker).type == "basic" || coin(ticker).type == "lnAddress")) ? (
                 <div>
                     <p class={tw`text-xl mt-1 dark:text-white text-center max-w-md mx-auto`}>Tap or scan to pay</p>
-                    <img 
+                    {/* <img 
                         class={tw`border-white border-8 rounded-lg w-64 h-64 mx-auto mt-4 transition-transform transform-gpu md:motion-safe:hover:scale-105 motion-safe:active:scale-95 hover:cursor-pointer`}
                         src={"/" + domain + "/" + ticker + "/qr/" + address}
                         onmouseup={`(() => {window.location.assign("${getUrl(address, ticker)}")})()`}
-                    />
-                    {(coin(ticker).type == "lnAddress") ? <p class={tw`text-xl mt-1.5 dark:text-white text-center max-w-xs mx-auto`}>You will need a <a style={"color: " + coin(ticker).color}href="https://lightningaddress.com"><strong>lightning address wallet</strong></a></p> : null}
+                    /> */}
+                    <div
+                        id="canvas"
+                        class={tw`flex justify-center w-64 h-64 mx-auto border-white border-8 rounded-xl ring-8 ring-white ring-inset mt-4 mb-4 transition-transform transform-gpu md:motion-safe:hover:scale-105 motion-safe:active:scale-95 hover:cursor-pointer`}
+                        onmouseup={`(() => {window.location.assign("${getUrl(address, ticker)}")})()`}
+                    ></div>
+                    <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+                    <script>{script(address, ticker)}</script>
+                    {(coin(ticker).type == "lnAddress") ? <p class={tw`text-xl mb-4 dark:text-white text-center max-w-xs mx-auto`}>You will need a <a style={"color: " + coin(ticker).color}href="https://lightningaddress.com"><strong>lightning address wallet</strong></a></p> : null}
                 </div>
              ) : (
                 <div>
                     <p class={tw`text-xl mt-1 dark:text-white text-center max-w-md mx-auto`}>Scan to pay</p>
-                    <img class={tw`border-white border-8 rounded-lg w-64 h-64 mx-auto mt-4`} src={"/" + domain + "/" + ticker + "/qr/" + address}/>
+                    {/* <img class={tw`border-white border-8 rounded-lg w-64 h-64 mx-auto mt-4`} src={"/" + domain + "/" + ticker + "/qr/" + address}/> */}
+                    <div
+                        id="canvas"
+                        class={tw`flex justify-center w-64 h-64 mx-auto border-white border-8 rounded-xl ring-8 ring-white ring-inset mt-4 mb-4`}
+                    ></div>
+                    <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+                    <script>{script(address, ticker)}</script>
                 </div>
              )
             
         }
         <div class={tw`flex justify-center`}>
             <button 
-                class={tw`mt-4 border-2 border-black dark:border-white dark:text-white text-center rounded-md w-full text-3xl px-4 pb-1 pt-0.5 w-80 mx-auto transition-transform transform-gpu md:motion-safe:hover:scale-105 motion-safe:active:scale-95`}
+                class={tw`border-2 border-black dark:border-white dark:text-white text-center rounded-md w-full text-3xl px-4 pb-1 pt-0.5 w-80 mx-auto transition-transform transform-gpu md:motion-safe:hover:scale-105 motion-safe:active:scale-95`}
                 onmouseup={`(() => {navigator.clipboard.writeText("${address}")})()`}
             >
                 📋 Copy Address
@@ -71,3 +84,37 @@ export const Pay = ({domain, ticker, address}: { domain: string, ticker: string,
 );
 
 const coin = (ticker: string) => { return coins[ticker] };
+
+const script = (address: string, ticker: string): string => `
+        const qrCode = new QRCodeStyling({
+            data: "${getUrl(address, ticker)}",
+            type: "canvas",
+            height: 500,
+            width: 500,
+            image: "${coin(ticker) ? "data:image/webp;base64," + encode(Deno.readFileSync("./static/coins/" + ticker + ".webp")) : null}",
+            dotsOptions: {
+                color: "${coin(ticker).color ?? "#000000"}",
+                type: "rounded"
+            },
+            cornersSquareOptions: {
+                color: "${coin(ticker).color ?? "#000000"}",
+                type: "extra-rounded" 
+            },
+            cornersDotOptions: {
+                color: "${coin(ticker).color ?? "#000000"}",
+                type: "dot"
+            },
+            backgroundOptions: {
+                color: "#ffffff"
+            }
+        });
+
+        // const qrCode = new QRCodeStyling({
+        //     data: "hello",
+        //     height: 300,
+        //     width: 100,
+        //     type: "svg"
+        // })
+
+        qrCode.append(document.getElementById("canvas"));
+`;

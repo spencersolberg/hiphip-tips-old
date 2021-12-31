@@ -9,7 +9,7 @@ export const coins: any = {
         name: "BTC Lightning",
         type: "lnAddress",
         protocol: "lightning:",
-        color: "#FF8D00"
+        color: "#8608FF"
     },
     "ETH": {
         name: "Ethereum",
