@@ -17,7 +17,7 @@ export const style = `
         font-family: "Courier New";
     }
 
-    * {
+    canvas, div {
         box-sizing: content-box !important;
     }
 `;
