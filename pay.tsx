@@ -106,6 +106,9 @@ const script = (address: string, ticker: string): string => `
             },
             backgroundOptions: {
                 color: "#ffffff"
+            },
+            imageOptions: {
+                margin: 16
             }
         });
 

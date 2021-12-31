@@ -12,7 +12,7 @@ import { qr } from "./qr.ts";
 import { getWallets } from "./functions/getWallets.ts";
 import { getAddress } from "./functions/getAddress.ts";
 
-console.log("Listening on http://localhost:8000");
+console.log("Listening on http://localhost:3000");
 serve(async (req) => {
     const url = new URL(req.url);
     const path = url.pathname;
@@ -61,4 +61,4 @@ serve(async (req) => {
     // const wallets = ["BTC", "HNS", "ETH"];
     return ssr(() => <Domain domain={domain} wallets={wallets}/>);
 
-})
+}, { addr: ":3000"})
