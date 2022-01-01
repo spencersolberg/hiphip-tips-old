@@ -29,5 +29,5 @@ export const getAddress = async (domain: string, ticker: string): Promise<string
     const response = await fetch(addressURL);
     const address = await response.text();
 
-    return address;
+    return address.trim();
 }
