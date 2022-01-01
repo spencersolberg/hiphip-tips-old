@@ -7,12 +7,20 @@
 import { h, tw } from "./deps.ts";
 import { coins } from "./coins.ts";
 import { style } from "./style.ts";
+import { Head } from "./head.tsx";
 
 export const Domain = ({ domain, wallets}: {domain: string, wallets: string[]}) => (
     <div>
         <style>
             {style}
         </style>
+        <Head />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:description" content={`Send ${wallets.slice(0, 3).join(", ")} to ${domain.includes(".") ? domain.toLowerCase() : domain.toLowerCase() + "/"}`} />
+        <meta name="twitter:url" content={"/" + domain} />
+        <meta name="twitter:title" content={"hiphip.tips | " + (domain.includes(".") ? domain.toLowerCase() : domain.toLowerCase() + "/")} />
+        <meta name="twitter:image" content="/static/favicon/apple-icon.png" />
+        <meta content="#34D399" data-react-helmet="true" name="theme-color" />
         <div class={tw`py-2 flex-col justify-between mx-auto px-4 dark:text-white`}>
             <div class={tw`mb-2`}>
                 <a href="/" class={tw`px-4 text-xl`}>

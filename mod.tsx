@@ -56,7 +56,8 @@ serve(async (req) => {
         return ssr(() => <Domain domain="hiphip.tips" wallets={["BTC","BTCLN", "HNS"]} />);
     }
 
-    const domain = path.replace("/", "");
+    let domain = path.replace("/", "");
+    domain = domain.replace("/", "")
     const wallets = await getWallets(domain);
     // const wallets = ["BTC", "HNS", "ETH"];
     return ssr(() => <Domain domain={domain} wallets={wallets}/>);

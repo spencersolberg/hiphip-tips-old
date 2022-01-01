@@ -8,12 +8,19 @@ import { h, tw, encode } from "./deps.ts";
 import { coins } from "./coins.ts";
 import { getUrl } from "./functions/getUrl.ts";
 import { style } from "./style.ts";
+import { Head } from "./head.tsx";
 
 export const Pay = ({domain, ticker, address}: { domain: string, ticker: string, address: string }) => (
     <div>
 
         <style>{style}</style>
-
+        <Head />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:description" content={`Send ${coin(ticker).name} (${ticker}) to ${domain.includes(".") ? domain.toLowerCase() : domain.toLowerCase() + "/"}`} />
+        <meta name="twitter:url" content={"/" + domain + "/" + ticker} />
+        <meta name="twitter:title" content={"hiphip.tips | " + (domain.includes(".") ? domain.toLowerCase() : domain.toLowerCase() + "/") + " | " + ticker} />
+        <meta name="twitter:image" content={"/" + domain + "/" + ticker + "/qr"} />
+        <meta content="#34D399" data-react-helmet="true" name="theme-color" />
         <div class={tw`py-2 flex-col justify-between mx-auto px-4 dark:text-white`}>
             <div class={tw`mb-2`}>
                 <a href="/" class={tw`px-4 text-xl`}>
