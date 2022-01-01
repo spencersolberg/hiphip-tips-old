@@ -98,7 +98,7 @@ const script = (address: string, ticker: string): string => `
             type: "canvas",
             height: 500,
             width: 500,
-            image: ${coin(ticker) ? "'data:image/webp;base64," + encode(Deno.readFileSync("./static/coins/" + ticker + ".webp'")) : undefined},
+            image: "${coin(ticker) ? "data:image/webp;base64," + encode(Deno.readFileSync("./static/coins/" + ticker + ".webp")) : ""}",
             dotsOptions: {
                 color: "${coin(ticker)?.color ?? "#000000"}",
                 type: "rounded"

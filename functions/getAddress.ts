@@ -22,7 +22,7 @@ export const getAddress = async (domain: string, ticker: string): Promise<string
         addressURL = "http://" + domain + "/.well-known/wallets/" + ticker.toUpperCase();
     } else {
         addressURL = "https://" + domain + ".hns.is/.well-known/wallets/" + ticker.toUpperCase();
-    };
+    }
 
     console.log("Requesting /.well-known/wallets/: " + addressURL);
     
