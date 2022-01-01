@@ -16,7 +16,7 @@ export const Pay = ({domain, ticker, address}: { domain: string, ticker: string,
         <style>{style}</style>
         <Head />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:description" content={`Send ${coin(ticker).name} (${ticker}) to ${domain.includes(".") ? domain.toLowerCase() : domain.toLowerCase() + "/"}`} />
+        <meta name="twitter:description" content={`Send ${coin(ticker) ? coin(ticker).name + ` (${ticker})` : ticker} to ${domain.includes(".") ? domain.toLowerCase() : domain.toLowerCase() + "/"}`} />
         <meta name="twitter:url" content={"/" + domain + "/" + ticker} />
         <meta name="twitter:title" content={"hiphip.tips | " + (domain.includes(".") ? domain.toLowerCase() : domain.toLowerCase() + "/") + " | " + ticker} />
         <meta name="twitter:image" content={"/" + domain + "/" + ticker + "/qr"} />
@@ -98,17 +98,17 @@ const script = (address: string, ticker: string): string => `
             type: "canvas",
             height: 500,
             width: 500,
-            image: "${coin(ticker) ? "data:image/webp;base64," + encode(Deno.readFileSync("./static/coins/" + ticker + ".webp")) : null}",
+            image: ${coin(ticker) ? "'data:image/webp;base64," + encode(Deno.readFileSync("./static/coins/" + ticker + ".webp'")) : undefined},
             dotsOptions: {
-                color: "${coin(ticker).color ?? "#000000"}",
+                color: "${coin(ticker)?.color ?? "#000000"}",
                 type: "rounded"
             },
             cornersSquareOptions: {
-                color: "${coin(ticker).color ?? "#000000"}",
+                color: "${coin(ticker)?.color ?? "#000000"}",
                 type: "extra-rounded" 
             },
             cornersDotOptions: {
-                color: "${coin(ticker).color ?? "#000000"}",
+                color: "${coin(ticker)?.color ?? "#000000"}",
                 type: "dot"
             },
             backgroundOptions: {
