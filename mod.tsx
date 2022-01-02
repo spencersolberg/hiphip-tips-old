@@ -19,7 +19,7 @@ serve(async (req) => {
 
     console.log("GET " + path);
 
-    if (path == "/favicon.ico") return new Response(null);
+    if (path == "/favicon.ico") return new Response(Deno.readFileSync("./static/favicon/favicon.ico"));
     if (path == "/.well-known/wallets" || path == "/.well-known/wallets/") return new Response("BTC,BTCLN,HNS");
     if (path.startsWith("/.well-known/wallets/")) {
         const ticker = path.replace("/.well-known/wallets/", "").replace("/", "");
