@@ -43,7 +43,7 @@ export const Pay = ({domain, ticker, address, marketData}: { domain: string, tic
                     </div>
                     <div class={tw`flex justify-center max-w-3xl mx-auto`}>
                         <h2 class={tw`text-3xl ${marketData!.increased ? "text-green-400" : "text-red-400 text-center" }`}>
-                        {((marketData!.increased ? "▲ " : "▼ ") + marketData!.percent.toLocaleString(undefined, {
+                        {((marketData!.increased ? "+" : "-") + marketData!.percent.toLocaleString(undefined, {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2,
                         }) + "% " + "$" + marketData!.price.toLocaleString(undefined, {
