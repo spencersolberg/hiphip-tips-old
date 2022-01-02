@@ -28,6 +28,16 @@ serve(async (req) => {
         const file = await Deno.readFile("./static/wallets/" + ticker);
         return new Response(file);
     }
+    if (path.startsWith("/.well-known/lnurlp/")) {
+        const domain = path.replace("/.well-known/lnurlp/", "").replace("/", "").toLowerCase();
+        const wallets = await getWallets(domain);
+        if (!wallets.includes("BTCLN")) { return new Response(undefined) } else {
+            const lnAddress = await getAddress(domain, "BTCLN");
+            const user = lnAddress.split("@")[0];
+            const host = lnAddress.split("@")[1];
+            return Response.redirect("https://" + host + "/.well-known/lnurlp/" + user);
+        }
+    }
     if (path.startsWith("/static/")) {
         const fileName = path.replace("/static/", "");
         const file = await Deno.readFile("./static/" + fileName);
@@ -51,7 +61,7 @@ serve(async (req) => {
         const domain = pathArr[0];
         const ticker = pathArr[1];
         const address = await getAddress(domain, ticker);
-        let marketData;
+        let marketData: {price: number, percent: number, increased: boolean} | null;
 
         if (coin(ticker)) {
             marketData = await getMarketData(coin(ticker).id);
@@ -69,7 +79,6 @@ serve(async (req) => {
     let domain = path.replace("/", "");
     domain = domain.replace("/", "")
     const wallets = await getWallets(domain);
-    // const wallets = ["BTC", "HNS", "ETH"];
     return ssr(() => <Domain domain={domain} wallets={wallets}/>);
 
 }, { addr: ":3000"})

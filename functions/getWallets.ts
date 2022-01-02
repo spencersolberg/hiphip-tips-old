@@ -5,14 +5,11 @@ export const getWallets = async (domain: string): Promise<string[]> => {
     const tlds = await getICANNTLDS();
 
     const icann = tlds.includes(domain.split(".")[domain.split(".").length - 1].toUpperCase());
-    const local = domain.includes("localhost");
 
     let walletsURL;
 
     if(icann) {
         walletsURL = "https://" + domain + "/.well-known/wallets/";
-    } else if (local) {
-        walletsURL = "http://" + domain + "/.well-known/wallets/";
     } else {
         walletsURL = "https://" + domain + ".hns.is/.well-known/wallets/";
     };
