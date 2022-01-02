@@ -11,6 +11,8 @@ import { Pay } from "./pay.tsx";
 import { qr } from "./qr.ts";
 import { getWallets } from "./functions/getWallets.ts";
 import { getAddress } from "./functions/getAddress.ts";
+import { getMarketData } from "./functions/getMarketData.ts";
+import { coins } from "./coins.ts";
 
 console.log("Listening on http://localhost:3000");
 serve(async (req) => {
@@ -49,7 +51,15 @@ serve(async (req) => {
         const domain = pathArr[0];
         const ticker = pathArr[1];
         const address = await getAddress(domain, ticker);
-        return ssr(() => <Pay domain={domain} ticker={ticker} address={address}/>);
+        let marketData;
+
+        if (coin(ticker)) {
+            marketData = await getMarketData(coin(ticker).id);
+        } else {
+            marketData = null;
+        }
+
+        return ssr(() => <Pay domain={domain} ticker={ticker} address={address} marketData={marketData}/>);
     }
 
     if (path.toLowerCase() == "/hiphip.tips" || path.toLowerCase() == "/hiphip.tips/") {
@@ -63,3 +73,5 @@ serve(async (req) => {
     return ssr(() => <Domain domain={domain} wallets={wallets}/>);
 
 }, { addr: ":3000"})
+
+const coin = (ticker: string) => { return coins[ticker] };

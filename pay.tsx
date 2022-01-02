@@ -10,7 +10,7 @@ import { getUrl } from "./functions/getUrl.ts";
 import { style } from "./style.ts";
 import { Head } from "./head.tsx";
 
-export const Pay = ({domain, ticker, address}: { domain: string, ticker: string, address: string }) => (
+export const Pay = ({domain, ticker, address, marketData}: { domain: string, ticker: string, address: string, marketData: {price: number, percent: number, increased: boolean} | null }) => (
     <div>
 
         <style>{style}</style>
@@ -20,7 +20,7 @@ export const Pay = ({domain, ticker, address}: { domain: string, ticker: string,
         <meta name="twitter:url" content={"/" + domain + "/" + ticker} />
         <meta name="twitter:title" content={"hiphip.tips | " + (domain.includes(".") ? domain.toLowerCase() : domain.toLowerCase() + "/") + " | " + ticker} />
         <meta name="twitter:image" content={"/" + domain + "/" + ticker + "/qr"} />
-        <meta content="#34D399" data-react-helmet="true" name="theme-color" />
+        <meta content={coin(ticker) ? coin(ticker).color : "#34D399"} data-react-helmet="true" name="theme-color" />
         <div class={tw`py-2 flex-col justify-between mx-auto px-4 dark:text-white`}>
             <div class={tw`mb-2`}>
                 <a href="/" class={tw`px-4 text-xl`}>
@@ -33,12 +33,25 @@ export const Pay = ({domain, ticker, address}: { domain: string, ticker: string,
         </div>
         {
             coin(ticker) ? (
-                <div class={tw`flex justify-center max-w-3xl mx-auto`}>  
-                    <span class={tw`text-4xl md:text-5xl dark:text-white text-center`}>
-                        <img src={"/static/coins/" + ticker + ".webp"} alt="" class={tw`w-10 h-10 md:w-12 md:h-12 mb-2 mr-2 inline`} />
+                <div>
+                    <div class={tw`flex justify-center max-w-3xl mx-auto`}>  
+                        <span class={tw`text-4xl md:text-5xl dark:text-white text-center`}>
+                            <img src={"/static/coins/" + ticker + ".webp"} alt="" class={tw`w-10 h-10 md:w-12 md:h-12 mb-2 mr-2 inline`} />
 
-                        {coin(ticker).name + ` (${ticker})`}
-                    </span>
+                            {coin(ticker).name + ` (${ticker})`}
+                        </span>
+                    </div>
+                    <div class={tw`flex justify-center max-w-3xl mx-auto`}>
+                        <h2 class={tw`text-3xl ${marketData!.increased ? "text-green-400" : "text-red-400 text-center" }`}>
+                        {((marketData!.increased ? "▲ " : "▼ ") + marketData!.percent.toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                        }) + "% " + "$" + marketData!.price.toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                        })) || ""}
+                        </h2>
+                    </div>
                 </div>
             ) : (
                 <h1 class={tw`text-4xl md:text-5xl dark:text-white text-center mt-4 break-all max-w-3xl mx-auto`}>{ticker}</h1>
@@ -79,7 +92,7 @@ export const Pay = ({domain, ticker, address}: { domain: string, ticker: string,
              )
             
         }
-        <div class={tw`flex justify-center`}>
+        <div class={tw`flex justify-center mb-8`}>
             <button 
                 class={tw`border-2 border-black dark:border-white dark:text-white text-center rounded-md w-full text-3xl px-4 pb-1 pt-0.5 w-80 mx-auto transition-transform transform-gpu md:motion-safe:hover:scale-105 motion-safe:active:scale-95`}
                 onmouseup={`(() => {navigator.clipboard.writeText("${address}")})()`}
