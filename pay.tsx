@@ -21,6 +21,8 @@ export const Pay = ({domain, ticker, address, marketData}: { domain: string, tic
         <meta name="twitter:title" content={"hiphip.tips | " + (domain.includes(".") ? domain.toLowerCase() : domain.toLowerCase() + "/") + " | " + ticker} />
         <meta name="twitter:image" content={"/" + domain + "/" + ticker + "/qr"} />
         <meta content={coin(ticker) ? coin(ticker).color : "#34D399"} data-react-helmet="true" name="theme-color" />
+        <title>{domain.includes(".") ? domain.toLowerCase() : domain.toLowerCase() + "/"} | {ticker}</title>
+
         <div class={tw`py-2 flex-col justify-between mx-auto px-4 dark:text-white`}>
             <div class={tw`mb-2`}>
                 <a href="/" class={tw`px-4 text-xl`}>

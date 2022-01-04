@@ -29,6 +29,7 @@ export const Index = () => (
         <meta name="twitter:description" content="Tip crypto to any HIP-0002 domain" />
         <meta name="twitter:image" content="/static/favicon/apple-icon.png" />
         <meta content="#34D399" data-react-helmet="true" name="theme-color" />
+        <title>hiphip.tips</title>
 
         <h1 class={tw`text-6xl md:text-8xl dark:text-white text-center mt-4 mb-8 mt-20 break-all max-w-3xl mx-auto`}>hiphip.tips</h1>
         <div class={tw`max-w-sm mx-auto px-2`}>

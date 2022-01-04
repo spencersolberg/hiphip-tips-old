@@ -21,6 +21,8 @@ export const Domain = ({ domain, wallets}: {domain: string, wallets: string[]}) 
         <meta name="twitter:title" content={"hiphip.tips | " + (domain.includes(".") ? domain.toLowerCase() : domain.toLowerCase() + "/")} />
         <meta name="twitter:image" content="/static/favicon/apple-icon.png" />
         <meta content="#34D399" data-react-helmet="true" name="theme-color" />
+        <title>{domain.includes(".") ? domain.toLowerCase() : domain.toLowerCase() + "/"}</title>
+
         <div class={tw`py-2 flex-col justify-between mx-auto px-4 dark:text-white`}>
             <div class={tw`mb-2`}>
                 <a href="/" class={tw`px-4 text-xl`}>
@@ -31,7 +33,7 @@ export const Domain = ({ domain, wallets}: {domain: string, wallets: string[]}) 
         
         <h1 class={tw`text-4xl md:text-5xl dark:text-white text-center mt-4 break-all max-w-3xl mx-auto`}>{domain.includes(".") ? domain.toLowerCase() : domain.toLowerCase() + "/"}</h1>
         
-        <div class={tw`grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 mx-auto max-w-xs md:max-w-md`}>
+        <div class={tw`grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 mb-4 mx-auto max-w-xs md:max-w-md`}>
             {wallets.map((ticker: string) => (
                 
                 <a href={"/" + domain + "/" + ticker}>

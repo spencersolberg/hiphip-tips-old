@@ -19,7 +19,7 @@ export const getWallets = async (domain: string): Promise<string[]> => {
     const response = await fetch(walletsURL);
     const text = await response.text();
 
-    const wallets = text.split(",");
+    const wallets = text.split(",").map(w => w.trim());
 
     return wallets;
 }
